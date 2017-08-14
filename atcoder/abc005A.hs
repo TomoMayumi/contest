@@ -1,0 +1,1 @@
+main = print . foldl1 (flip div) . map read . words =<< getLine

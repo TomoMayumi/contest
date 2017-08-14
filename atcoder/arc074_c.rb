@@ -1,0 +1,1 @@
+p [(h,w=gets.split.map &:to_i),[w,h]].map{|t,u|(1..t).map{|i|[[u,i],[i,u]].map{|x,y|a=[x/2*y,(x+1)/2*y,u*(t-i)];a.max-a.min}}}.flatten.min

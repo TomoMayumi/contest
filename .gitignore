@@ -1,0 +1,8 @@
+*.hi
+*.o
+*.exe
+*.out
+*.BAK
+*.txt
+*.in
+input

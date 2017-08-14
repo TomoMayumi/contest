@@ -1,0 +1,1 @@
+main = print . foldl1 (-) . map read . lines =<< getContents
