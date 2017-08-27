@@ -5,4 +5,5 @@
 *.BAK
 *.txt
 *.in
+.python-version
 input
