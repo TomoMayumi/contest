@@ -4,16 +4,16 @@
 #define FALSE       0
 
 #define CITY_MAX    101
-#define CICKET_MAX  10
+#define TICKET_MAX  10
 #define LINE_MAX    (501*2)
 
 #define COST_MAX    10000000
 
-#define QUE_SIZE    (LINE_MAX*CICKET_MAX)
+#define QUE_SIZE    (LINE_MAX*TICKET_MAX)
 
 
-int mincost[CITY_MAX][CICKET_MAX];
-int gone[CITY_MAX][CICKET_MAX];
+int mincost[CITY_MAX][TICKET_MAX];
+int gone[CITY_MAX][TICKET_MAX];
 
 int first_line[CITY_MAX]; /* first index of a bus departing from the city */
 
@@ -25,7 +25,7 @@ int line_next[LINE_MAX]; /* next index of a bus departing from the same city */
 typedef struct _QueItem {
     int cost;
     int city;
-    int cicket;
+    int ticket;
 } QueItem;
 QueItem heapq[QUE_SIZE]; /* index 0: unuse, index 1.. : que */
 int quecnt;
@@ -47,7 +47,7 @@ int main(){
         quecnt=0;
         for(i=0;i<CITY_MAX;i++){
             first_line[i]=-1;
-            for(j=0;j<CICKET_MAX;j++){
+            for(j=0;j<TICKET_MAX;j++){
                 mincost[i][j]=COST_MAX;
                 gone[i][j]=FALSE;
             }
@@ -74,31 +74,31 @@ int main(){
         /* dijkstra */
         item.cost=0;
         item.city=s;
-        item.cicket=c;
+        item.ticket=c;
         enq(item);
         while(quecnt>0){
             item = deq();
-            if(gone[item.city][item.cicket])continue;
-            gone[item.city][item.cicket] = TRUE;
-            mincost[item.city][item.cicket] = item.cost;
+            if(gone[item.city][item.ticket])continue;
+            gone[item.city][item.ticket] = TRUE;
+            mincost[item.city][item.ticket] = item.cost;
 
             /* all bus line from item.city */
             i=first_line[item.city];
             while(i>=0){
                 int dst = line_dst[i];
                 int cost = line_cost[i];
-                /* cicket nouse */
-                if(gone[dst][item.cicket]==FALSE){
+                /* ticket nouse */
+                if(gone[dst][item.ticket]==FALSE){
                     item2.cost=item.cost+cost;
                     item2.city=dst;
-                    item2.cicket=item.cicket;
+                    item2.ticket=item.ticket;
                     enq(item2);
                 }
-                /* cicket use */
-                if(item.cicket>0 && gone[dst][item.cicket]==FALSE){
+                /* ticket use */
+                if(item.ticket>0 && gone[dst][item.ticket]==FALSE){
                     item2.cost=item.cost+cost/2;
                     item2.city=dst;
-                    item2.cicket=item.cicket-1;
+                    item2.ticket=item.ticket-1;
                     enq(item2);
                 }
                 i = line_next[i];
