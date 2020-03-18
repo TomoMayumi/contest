@@ -51,11 +51,8 @@ p blocks.size
 puts blocks.map{|cells|cells.map{|yx|yx*" "}}
 #p score
 __END__
-
-
-(1..h+1-k).step(k).to_a.product((1..w+1-k).step(k).to_a).map{|ys,xs|
-
-}
+h,w,k=gets.split.map(&:to_i)
+s=[[0]]+(1..h).map{[0]+gets.chomp.chars.map(&:to_i)}
 
 better = (1..k).select{|i|k%i==0}.map{|hi|
   wi = k / hi
