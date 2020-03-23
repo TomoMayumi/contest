@@ -2,6 +2,41 @@
 H,W,K=gets.split.map(&:to_i)
 S=[[0]]+(1..H).map{[0]+gets.chomp.chars.map(&:to_i)}
 
+def check_renketu(block)
+  ok,*left = *block
+  ok = [ok]
+  while ok[0]
+    y,x=ok.pop
+    left.reject!{|yi,xi|
+      if (y-yi).abs+(x-xi).abs <= 1
+        ok << [yi,xi]
+      end
+    }
+  end
+  left == []
+end
+
+
+h,w=3,4
+blocks = (1..H-h).step(h).to_a.product((1..W-w).step(w).to_a).map{|ys,xs|
+  cells = [*ys...ys+h].product([*xs...xs+w])
+  block = cells.sort_by{|y,x|S[y][x]}[-8,8]
+  if check_renketu(block)
+    block
+  else
+    cells[0,8]
+  end
+}
+
+p blocks.size
+puts blocks.map{|cells|cells.map{|yx|yx*" "}}
+
+
+__END__
+#require 'pp'
+H,W,K=gets.split.map(&:to_i)
+S=[[0]]+(1..H).map{[0]+gets.chomp.chars.map(&:to_i)}
+
 memo = {}
 
 # 1ブロック分の得点を計算して返す
