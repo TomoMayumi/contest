@@ -1,0 +1,1 @@
+puts gets.chomp.chars.each_cons(2).all?{|a,b|a>b} ? "Yes" : "No"
