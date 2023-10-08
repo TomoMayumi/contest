@@ -1,0 +1,1 @@
+puts gets.chomp.chars.each_slice(2).all?{|a,b|b=='0'} ? "Yes" : "No"
