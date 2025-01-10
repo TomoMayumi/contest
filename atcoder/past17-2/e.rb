@@ -1,0 +1,1 @@
+puts gets.chomp.chars.chunk(&:itself).flat_map{|c,l|[c,l.size]}*" "
