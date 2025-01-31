@@ -1,0 +1,1 @@
+puts ("00"+gets.to_i.to_s(16))[-2,2].upcase
